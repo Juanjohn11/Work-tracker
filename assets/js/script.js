@@ -1,35 +1,58 @@
 var currentTime = moment().format('MMMM Do YYYY');
 $("#currentDay").text(currentTime);
 
-var currentHour= moment().hour();
-$(".time-block").each(function(index){
-    var time= parseInt($(this).siblings(".hour").attr("id"))
-    console.log(time)
-    if(currentHour > time ){
-        $(this).addClass("past")
-    }
-    else if (currentHour < time){
-        $(this).addClass("future")
-    }
-    else {
-        $(this).addClass("present")
-    }
-})
 
 $(document).ready(function(){
     $(".saveBtn").on("click",  function (){
         var text = $(this).siblings(".description").val();
-        var time = $(this).parent().attr("id");
+        var hourTask = $(this).parent().attr("id");
 
-        localStorage.setItem(time, text);
+        localStorage.setItem(hourTask, text);
 
     })
 
-    $("#9 .description").val(localStorage.getItem("9"));
-    //debugger;
-})
+    function colorTracker() {
+        var currentHour = moment().hour();
 
+
+        $(".time-block").each(function () {
+
+            var timeBl = parseInt($(this).attr("id"));
+
+            console.log(timeBl)
+
+
+            if (timeBl < currentHour){
+            $(this).addClass("past");
+            $(this).removeClass("future");
+            $(this).removeClass("present");
+            }
+            else if (timeBl === currentHour){
+            $(this).addClass("present");
+            $(this).removeClass("future");
+            $(this).removeClass("past");
+            }
+            else {
+            $(this).addClass("future");
+            $(this).removeClass("past");
+            $(this).removeClass("present");
+            }
+        })
     
+    }
 
+   
 
+    $("#9 .description").val(localStorage.getItem("9"));
+    $("#10 .description").val(localStorage.getItem("10"));    
+    $("#11 .description").val(localStorage.getItem("11"));
+    $("#12 .description").val(localStorage.getItem("12"));
+    $("#1 .description").val(localStorage.getItem("1"));
+    $("#2 .description").val(localStorage.getItem("2"));    
+    $("#3 .description").val(localStorage.getItem("3"));
+    $("#4 .description").val(localStorage.getItem("4"));
+    $("#5 .description").val(localStorage.getItem("5"));
+
+    colorTracker();
+})
 
