@@ -14,7 +14,6 @@ $(document).ready(function(){
     function colorTracker() {
         var currentHour = moment().hour();
 
-
         $(".time-block").each(function () {
 
             var timeBl = parseInt($(this).attr("id"));
