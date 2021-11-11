@@ -1,7 +1,8 @@
 var currentTime = moment().format('MMMM Do YYYY');
 $("#currentDay").text(currentTime);
+
 var currentHour= moment().hour();
-$(".description").each(function(index){
+$(".time-block").each(function(index){
     var time= parseInt($(this).siblings(".hour").attr("id"))
     console.log(time)
     if(currentHour > time ){
@@ -14,9 +15,21 @@ $(".description").each(function(index){
         $(this).addClass("present")
     }
 })
-var saveTask = function () {
-    tasks = 
+
+$(document).ready(function(){
+    $(".saveBtn").on("click",  function (){
+        var text = $(this).siblings(".description").val();
+        var time = $(this).parent().attr("id");
+
+        localStorage.setItem(time, text);
+
+    })
+
+    $("#9 .description").val(localStorage.getItem("9"));
+    //debugger;
+})
 
     
-}
-console.log(currentHour);
+
+
+
